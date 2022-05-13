@@ -27,7 +27,8 @@ class _HomePageState extends State<HomePage> {
   Weather? data;
 
   Future<void> getData() async {
-    data = await client.getCurrentWeather('England');
+    await client.determinePosition();
+    data = await client.getCurrentWeather(client.city);
   }
 
   @override
@@ -80,6 +81,31 @@ class _HomePageState extends State<HomePage> {
                   '${data!.humidity}',
                   '${data!.pressure}',
                   '${data!.feelLike}',
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: DropdownButton<String>(
+                    items: [
+                      DropdownMenuItem(
+                        value: client.actualLocationCity,
+                        child: Text(client.actualLocationCity),
+                      ),
+                      const DropdownMenuItem(
+                        value: 'London',
+                        child: Text('London'),
+                      ),
+                      const DropdownMenuItem(
+                        value: 'Maranhão',
+                        child: Text('Maranhão'),
+                      ),
+                    ],
+                    onChanged: (newValue) async {
+                      client.city = newValue!;
+                      await getData();
+
+                      setState(() {});
+                    },
+                  ),
                 ),
               ],
             );

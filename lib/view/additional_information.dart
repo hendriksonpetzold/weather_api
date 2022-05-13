@@ -8,7 +8,7 @@ Widget additionInformation(
     String wind, String humidity, String pressure, String feelLike) {
   return Container(
     width: double.infinity,
-    padding: EdgeInsets.all(10),
+    padding: const EdgeInsets.all(10),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
