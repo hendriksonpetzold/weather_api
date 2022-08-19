@@ -44,12 +44,10 @@ class WeatherApiClient {
 
     List<Placemark> placemarks =
         await placemarkFromCoordinates(position.latitude, position.longitude);
-    if (city.isEmpty) {
+    if (city.isEmpty || city == actualLocationCity) {
       city = placemarks[0].subAdministrativeArea!;
     }
-    if (city == actualLocationCity) {
-      city = placemarks[0].subAdministrativeArea!;
-    }
+
     return await Geolocator.getCurrentPosition();
   }
 }
